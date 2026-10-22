@@ -33,7 +33,8 @@ After changing the layout in Foxglove, export it over `layouts/dontfall.json`.
 
 A Foxglove extension (TypeScript + React):
 
-- **DontFall status**: armed / disarmed / no data badge, supervisor and
+- **DontFall status**: armed / disarmed / no data badge, a DISARM button
+  (`/dontfall_m4/arm` false, shows the reply), supervisor and
   IMU state, age of the last `/diagnostics`
 
 Build and install:

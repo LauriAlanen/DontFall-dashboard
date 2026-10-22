@@ -12,6 +12,9 @@ const SUPERVISOR = "dontfall_m4: supervisor";
 const IMU = "dontfall_m4: imu";
 // /diagnostics comes at 1 Hz: three missed messages means the link is gone
 const STALE_MS = 3000;
+// std_srvs/SetBool: false = disarm (DontFall-M4 app/src/uros.c)
+const ARM_SERVICE = "/dontfall_m4/arm";
+type SetBoolResponse = { success: boolean; message: string };
 
 type Latest = { supervisor?: DiagnosticStatus; imu?: DiagnosticStatus; receivedMs: number };
 
@@ -31,6 +34,21 @@ function StatusPanel({ context }: { context: PanelExtensionContext }): ReactElem
   const [latest, setLatest] = useState<Latest | undefined>();
   const [now, setNow] = useState(Date.now());
   const [renderDone, setRenderDone] = useState<(() => void) | undefined>();
+  const [reply, setReply] = useState<string | undefined>();
+
+  // Ask the M4 to disarm. The M4 decides; this shows what it answered.
+  async function disarm(): Promise<void> {
+    if (context.callService == undefined) {
+      return;
+    }
+    setReply("disarming...");
+    try {
+      const res = (await context.callService(ARM_SERVICE, { data: false })) as SetBoolResponse;
+      setReply(`${res.success ? "ok" : "refused"}: ${res.message}`);
+    } catch (err) {
+      setReply(`failed: ${String(err)}`);
+    }
+  }
 
   useLayoutEffect(() => {
     context.onRender = (renderState, done) => {
@@ -92,7 +110,30 @@ function StatusPanel({ context }: { context: PanelExtensionContext }): ReactElem
       >
         {b.text}
       </div>
+      {/* Never disabled by state: a stale /diagnostics doesn't mean the
+          service is unreachable, and a stop button must always be pressable. */}
+      <button
+        onClick={() => {
+          void disarm();
+        }}
+        disabled={context.callService == undefined}
+        style={{
+          width: "100%",
+          marginTop: "0.5rem",
+          padding: "0.75rem",
+          fontSize: "1.5rem",
+          fontWeight: "bold",
+          color: "white",
+          background: "#c62828",
+          border: "none",
+          borderRadius: "0.5rem",
+          cursor: "pointer",
+        }}
+      >
+        DISARM
+      </button>
       <div style={{ marginTop: "0.5rem", lineHeight: 1.6 }}>
+        <div style={{ opacity: 0.7 }}>Last disarm request: {reply ?? "-"}</div>
         <div>Supervisor: {latest?.supervisor?.message ?? "-"}</div>
         <div>IMU: {latest?.imu?.message ?? "-"}</div>
         <div style={{ opacity: 0.7 }}>
