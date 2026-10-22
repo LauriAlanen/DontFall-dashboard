@@ -81,20 +81,6 @@
       "xAxisVal": "timestamp",
       "followingViewWidth": 10
     },
-    "Indicator!armed": {
-      "path": "/diagnostics.status[1].message",
-      "style": "background",
-      "fallbackColor": "#e0a030",
-      "fallbackLabel": "DISARMED (or no data)",
-      "rules": [
-        {
-          "operator": "=",
-          "rawValue": "armed",
-          "color": "#4caf50",
-          "label": "ARMED"
-        }
-      ]
-    },
     "DiagnosticSummary!m4": {
       "topicToRender": "/diagnostics",
       "minLevel": 0,
@@ -119,15 +105,6 @@
       "buttonColor": "#4caf50",
       "editingMode": false
     },
-    "CallService!disarm": {
-      "serviceName": "/dontfall_m4/arm",
-      "requestPayload": "{\"data\": false}",
-      "layout": "vertical",
-      "buttonText": "DISARM",
-      "buttonTooltip": "std_srvs/SetBool on /dontfall_m4/arm",
-      "buttonColor": "#d32f2f",
-      "editingMode": false
-    },
     "Teleop!drive": {
       "topic": "/cmd_vel",
       "publishRate": 10,
@@ -147,7 +124,9 @@
         "field": "angular-z",
         "value": -0.5
       }
-    }
+    },
+    "dontfall-panels.DontFall status!status": {},
+    "dontfall-panels.DontFall tilt!tilt": {}
   },
   "globalVariables": {},
   "userNodes": {},
@@ -159,26 +138,27 @@
     "splitPercentage": 62,
     "first": {
       "direction": "column",
-      "first": "Plot!tilt",
+      "splitPercentage": 40,
+      "first": {
+        "direction": "row",
+        "splitPercentage": 35,
+        "first": "dontfall-panels.DontFall tilt!tilt",
+        "second": "Plot!tilt"
+      },
       "second": {
         "direction": "column",
         "first": "Plot!gyro",
         "second": "Plot!cmd_vel"
-      },
-      "splitPercentage": 34
+      }
     },
     "second": {
       "direction": "column",
-      "splitPercentage": 22,
+      "splitPercentage": 32,
       "first": {
         "direction": "row",
-        "splitPercentage": 40,
-        "first": "Indicator!armed",
-        "second": {
-          "direction": "row",
-          "first": "CallService!arm",
-          "second": "CallService!disarm"
-        }
+        "splitPercentage": 70,
+        "first": "dontfall-panels.DontFall status!status",
+        "second": "CallService!arm"
       },
       "second": {
         "direction": "column",
@@ -186,9 +166,9 @@
         "first": "Teleop!drive",
         "second": {
           "direction": "column",
+          "splitPercentage": 45,
           "first": "DiagnosticSummary!m4",
-          "second": "RawMessages!diag",
-          "splitPercentage": 45
+          "second": "RawMessages!diag"
         }
       }
     }

@@ -3,7 +3,7 @@
 The PC dashboard for the [DontFall](https://github.com/LauriAlanen/DontFall)
 robot: Foxglove layouts and, later, custom Foxglove panels. Runs on the PC
 only; the robot serves no web pages, it offers its ROS 2 interface and
-this talks to it (plan: `DontFall/docs/dashboard-plan.md`).
+this talks to it (plan: `DontFall/docs/archive/dashboard-plan.md`).
 
 ```
  Foxglove (Windows)  <-- ws://localhost:8765 -->  foxglove_bridge  <-- DDS, LAN -->  board
@@ -18,11 +18,13 @@ this talks to it (plan: `DontFall/docs/dashboard-plan.md`).
 
 ## Layout `layouts/dontfall.json`
 
-- Plots: tilt (roll/pitch in degrees, via Foxglove's `.@rpy`), gyro, and
-  `/cmd_vel` as sent from the PC
-- Armed badge from `/diagnostics.status[1]`, the M4 supervisor status
-  (amber = disarmed or no data)
-- ARM / DISARM: `/dontfall_m4/arm` (`std_srvs/SetBool`)
+Needs the panels from `dontfall-panels/` installed (below); without them
+those two show as unknown panels.
+
+- **DontFall tilt** next to a roll/pitch plot (degrees, via Foxglove's
+  `.@rpy`); gyro and `/cmd_vel` (as sent from the PC) plots below
+- **DontFall status** (badge, DISARM) and a stock ARM button
+  (`/dontfall_m4/arm`, `std_srvs/SetBool`)
 - Teleop on `/cmd_vel` at 10 Hz; the M4 zeroes it 500 ms after the last
   message, and ignores it while disarmed
 - Diagnostics summary and raw `/diagnostics`: what the M4 actually uses
