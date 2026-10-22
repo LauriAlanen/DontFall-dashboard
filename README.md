@@ -28,3 +28,23 @@ this talks to it (plan: `DontFall/docs/dashboard-plan.md`).
 - Diagnostics summary and raw `/diagnostics`: what the M4 actually uses
 
 After changing the layout in Foxglove, export it over `layouts/dontfall.json`.
+
+## Panels `dontfall-panels/`
+
+A Foxglove extension (TypeScript + React):
+
+- **DontFall status**: armed / disarmed / no data badge, supervisor and
+  IMU state, age of the last `/diagnostics`
+
+Build and install:
+
+```sh
+cd dontfall-panels
+npm install          # once
+npm run lint
+npm run package      # -> dontfall.dontfall-panels-<version>.foxe
+```
+
+Drag the `.foxe` file onto the Foxglove window (from Windows:
+`\\wsl$\<distro>\home\...\DontFall-dashboard\dontfall-panels\`), then add
+the panel by name.
