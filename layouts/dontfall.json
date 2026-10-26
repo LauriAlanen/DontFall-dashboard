@@ -69,9 +69,21 @@
           "label": "turn (rad/s)",
           "enabled": true,
           "timestampMethod": "receiveTime"
+        },
+        {
+          "value": "/follow/cmd_vel.linear.x",
+          "label": "follow speed (m/s)",
+          "enabled": true,
+          "timestampMethod": "receiveTime"
+        },
+        {
+          "value": "/follow/cmd_vel.angular.z",
+          "label": "follow turn (rad/s)",
+          "enabled": true,
+          "timestampMethod": "receiveTime"
         }
       ],
-      "title": "cmd_vel (sent)",
+      "title": "cmd_vel (sent) and follow (suggested)",
       "showLegend": true,
       "legendDisplay": "floating",
       "showPlotValuesInLegend": true,

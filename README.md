@@ -36,6 +36,11 @@ those two show as unknown panels.
   link holds ~1 MB/s of camera data in all
   (`DontFall/docs/camera-plan.md` step 2): the vision node subscribes
   once and republishes for everyone on the PC
+- Follow (`DontFall/pc/ros.sh follow`, dry run): its suggestion
+  `/follow/cmd_vel` in the cmd_vel plot, and the person it follows (blue
+  box, line from the middle) from `/follow/annotations`, ticked in the
+  camera panel's settings like the vision boxes. Nothing drives the robot
+  from it
 - Teleop on `/cmd_vel` at 10 Hz; the M4 zeroes it 500 ms after the last
   message, and ignores it while disarmed
 - Diagnostics summary and raw `/diagnostics`: what the M4 actually uses
