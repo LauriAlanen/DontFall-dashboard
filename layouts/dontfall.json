@@ -129,7 +129,7 @@
     "dontfall-panels.DontFall tilt!tilt": {},
     "Image!camera": {
       "imageMode": {
-        "imageTopic": "/camera/image_raw/compressed"
+        "imageTopic": "/vision/image/compressed"
       },
       "cameraState": {},
       "followMode": "follow-pose",

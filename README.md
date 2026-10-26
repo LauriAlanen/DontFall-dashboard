@@ -13,6 +13,7 @@ this talks to it (plan: `DontFall/docs/archive/dashboard-plan.md`).
 ## Use
 
 1. Board up, then on the PC: `~/Projects/DontFall/pc/ros.sh bridge`
+   (and `~/Projects/DontFall/pc/ros.sh vision` for the camera panel)
 2. Foxglove: Open connection -> Foxglove WebSocket -> `ws://localhost:8765`
 3. Layouts -> Import from file -> `layouts/dontfall.json`
 
@@ -25,11 +26,15 @@ those two show as unknown panels.
   `.@rpy`); gyro and `/cmd_vel` (as sent from the PC) plots below
 - **DontFall status** (badge, DISARM) and a stock ARM button
   (`/dontfall_m4/arm`, `std_srvs/SetBool`)
-- Camera: `/camera/image_raw/compressed` (the board's USB camera,
-  640x480 at 15 fps, ~0.43 MB/s over WiFi). Every PC process that
-  subscribes gets its own copy over WiFi, and the link holds ~1 MB/s of
-  camera data in all (`DontFall/docs/camera-plan.md` step 2), so close
-  other camera viewers while Foxglove shows it
+- Camera: `/vision/image/compressed`, the frames the PC vision node
+  (`DontFall/pc/ros.sh vision`) looked at, with its person boxes from
+  `/vision/annotations` (tick them in the panel's settings). Needs the
+  vision node running; without it, pick the board's
+  `/camera/image_raw/compressed` in the panel. Every PC process that
+  subscribes to the board's topic gets its own copy over WiFi, and the
+  link holds ~1 MB/s of camera data in all
+  (`DontFall/docs/camera-plan.md` step 2): the vision node subscribes
+  once and republishes for everyone on the PC
 - Teleop on `/cmd_vel` at 10 Hz; the M4 zeroes it 500 ms after the last
   message, and ignores it while disarmed
 - Diagnostics summary and raw `/diagnostics`: what the M4 actually uses
