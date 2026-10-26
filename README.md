@@ -25,6 +25,11 @@ those two show as unknown panels.
   `.@rpy`); gyro and `/cmd_vel` (as sent from the PC) plots below
 - **DontFall status** (badge, DISARM) and a stock ARM button
   (`/dontfall_m4/arm`, `std_srvs/SetBool`)
+- Camera: `/camera/image_raw/compressed` (the board's USB camera,
+  640x480 at 15 fps, ~0.43 MB/s over WiFi). Every PC process that
+  subscribes gets its own copy over WiFi, and the link holds ~1 MB/s of
+  camera data in all (`DontFall/docs/camera-plan.md` step 2), so close
+  other camera viewers while Foxglove shows it
 - Teleop on `/cmd_vel` at 10 Hz; the M4 zeroes it 500 ms after the last
   message, and ignores it while disarmed
 - Diagnostics summary and raw `/diagnostics`: what the M4 actually uses

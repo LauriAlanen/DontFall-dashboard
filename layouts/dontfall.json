@@ -126,7 +126,19 @@
       }
     },
     "dontfall-panels.DontFall status!status": {},
-    "dontfall-panels.DontFall tilt!tilt": {}
+    "dontfall-panels.DontFall tilt!tilt": {},
+    "Image!camera": {
+      "imageMode": {
+        "imageTopic": "/camera/image_raw/compressed"
+      },
+      "cameraState": {},
+      "followMode": "follow-pose",
+      "scene": {},
+      "transforms": {},
+      "topics": {},
+      "layers": {},
+      "publish": {}
+    }
   },
   "globalVariables": {},
   "userNodes": {},
@@ -146,9 +158,14 @@
         "second": "Plot!tilt"
       },
       "second": {
-        "direction": "column",
-        "first": "Plot!gyro",
-        "second": "Plot!cmd_vel"
+        "direction": "row",
+        "splitPercentage": 55,
+        "first": "Image!camera",
+        "second": {
+          "direction": "column",
+          "first": "Plot!gyro",
+          "second": "Plot!cmd_vel"
+        }
       }
     },
     "second": {
