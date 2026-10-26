@@ -27,7 +27,8 @@ those two show as unknown panels.
 - **DontFall status** (badge, DISARM) and a stock ARM button
   (`/dontfall_m4/arm`, `std_srvs/SetBool`)
 - Camera: `/vision/image/compressed`, the frames the PC vision node
-  (`DontFall/pc/ros.sh vision`) looked at, with its person boxes from
+  (`DontFall/pc/ros.sh vision`) looked at, with its person (green) and
+  face (orange) boxes from
   `/vision/annotations` (tick them in the panel's settings). Needs the
   vision node running; without it, pick the board's
   `/camera/image_raw/compressed` in the panel. Every PC process that
