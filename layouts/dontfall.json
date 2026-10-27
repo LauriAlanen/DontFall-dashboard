@@ -150,6 +150,31 @@
       "topics": {},
       "layers": {},
       "publish": {}
+    },
+    "Plot!balance": {
+      "paths": [
+        {
+          "value": "/dontfall_m4/imu.orientation.@rpy.pitch",
+          "label": "pitch θ (rad)",
+          "enabled": true,
+          "timestampMethod": "receiveTime"
+        },
+        {
+          "value": "/dontfall_m4/joint_states.effort[0]",
+          "label": "wheel torque (N m)",
+          "enabled": true,
+          "timestampMethod": "receiveTime"
+        }
+      ],
+      "title": "Balance: tilt and the torque that pushes back",
+      "showLegend": true,
+      "legendDisplay": "floating",
+      "showPlotValuesInLegend": true,
+      "showXAxisLabels": true,
+      "showYAxisLabels": true,
+      "isSynced": true,
+      "xAxisVal": "timestamp",
+      "followingViewWidth": 10
     }
   },
   "globalVariables": {},
@@ -176,7 +201,11 @@
         "second": {
           "direction": "column",
           "first": "Plot!gyro",
-          "second": "Plot!cmd_vel"
+          "second": {
+            "direction": "column",
+            "first": "Plot!balance",
+            "second": "Plot!cmd_vel"
+          }
         }
       }
     },
