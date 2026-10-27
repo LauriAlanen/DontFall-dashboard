@@ -11,7 +11,7 @@ const TOPIC = "/dontfall_m4/imu";
 // Copies of SUPERVISOR_ARM_TILT / SUPERVISOR_DISARM_TILT (supervisor.h),
 // for drawing only: the M4 makes the decision.
 const ARM_DEG = 5;
-const DISARM_DEG = 25;
+const DISARM_DEG = 15;
 // the gauge's edge
 const RANGE_DEG = 30;
 const DEG = 180 / Math.PI;

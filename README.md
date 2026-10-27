@@ -55,7 +55,7 @@ A Foxglove extension (TypeScript + React):
   (`/dontfall_m4/arm` false, shows the reply), supervisor and
   IMU state, age of the last `/diagnostics`
 - **DontFall tilt**: bubble level from `/dontfall_m4/imu`, the angle from
-  upright the supervisor checks, with the 5° arm and 25° disarm rings
+  upright the supervisor checks, with the 5° arm and 15° disarm rings
   (copies of `supervisor.h`, drawing only)
 
 Build and install:
