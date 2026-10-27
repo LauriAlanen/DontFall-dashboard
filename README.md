@@ -34,7 +34,7 @@ those two show as unknown panels.
   `/camera/image_raw/compressed` in the panel. Every PC process that
   subscribes to the board's topic gets its own copy over WiFi, and the
   link holds ~1 MB/s of camera data in all
-  (`DontFall/docs/camera-plan.md` step 2): the vision node subscribes
+  (`DontFall/docs/archive/camera-plan.md` step 2): the vision node subscribes
   once and republishes for everyone on the PC
 - Follow (`DontFall/pc/ros.sh follow`, dry run): its suggestion
   `/follow/cmd_vel` in the cmd_vel plot, and the person it follows (blue
